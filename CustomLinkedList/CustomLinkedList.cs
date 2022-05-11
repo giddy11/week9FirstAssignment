@@ -11,56 +11,88 @@ namespace LinkedList1
         public ListNode<T> Head { get; set; }
         public ListNode<T> Tail { get; set; }
 
-        public void AddLast(T item)
+        
+        public virtual void AddLast(T item)
         {
+            AddItem(item);
+        }
 
-            if (Head is null)
+        
+        public void AddFirst(T item)
+        {
+            if(Head is null)
             {
                 Head = Tail = new ListNode<T>(item);
             }
             else
             {
-                var temp = Tail;
-                var newNode = new ListNode<T>(item, temp);
-                ListNode<T> current = Head;
-
-                while (current.NextNode != null)
-                {
-                    current = current.NextNode;
-                }
-                current.NextNode = new ListNode<T>(item, temp);
-                Tail.NextNode = newNode;
-                Tail = newNode;
+                var temp = Head;
+                var first = new ListNode<T>(item,null,temp);
+                Head = first;
             }
+            
         }
-        public void AddFirst(T item)
+
+        
+        public ListNode<T> Find(T item)
         {
-            ListNode<T> first = new ListNode<T>(item);
-            first.NextNode = Head;
-            Head = first;
-        }
-        public void Find(T item)
-        {
-            if (Head is null)
+            for (ListNode<T> current = Head; current.NextNode != null; current = current.NextNode)
             {
-                Console.WriteLine("Lisy is Empty");
+                if(Equals(current.Value, item))
+                {
+                    return current;
+                }
             }
-
+            return null;
         }
 
+        
         public void Remove(T item)
         {
+            var nodeToRemove = Find(item);
 
-            ListNode<T> currentNode = Head;
-            while (currentNode != null)
+            if (nodeToRemove is null)
             {
-                if (Head.Value == item)
-                {
-                    Head = null;
-                    Head = currentNode;
-                }
+                return;
+            }
+            else if (nodeToRemove.Equals(Head))
+            {
+                var temp = Head.NextNode;
+                Head.NextNode = null;
+                Head = temp;
+            }
+            else if (nodeToRemove.Equals(Tail))
+            {
+                var temp = Tail.PreviousNode;
+                Tail.PreviousNode = null;
+                Tail = temp;
+            }
+            else
+            {
+                var prev = nodeToRemove.PreviousNode;
+                var next = nodeToRemove.NextNode;
+                if (prev != null) prev.NextNode = next;
+                if (next != null) next.PreviousNode = prev;
+
+                nodeToRemove.PreviousNode = nodeToRemove.NextNode = null;
             }
         }
+
+        public void Remove()
+        {
+            if (Head == Tail)
+            {
+                Head = Tail = null;
+            }
+            else
+            {
+                var temp = Tail.PreviousNode;
+                Tail.PreviousNode = null;
+                Tail = temp;
+            }
+        }
+
+        
         public void Clear()
         {
             Head = Tail = null;

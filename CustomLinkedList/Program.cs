@@ -1,25 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using LinkedList1;
 
-//var newList = new List<int>();
 //var mySecondList = new LinkedList<int>();
 
-var myList = new CustomLinkedList<int>();
+//var myList = new CustomLinkedList<int>();
+//var myStack = new CustomedStack<int>();
 
-myList.AddFirst(1);
-myList.AddFirst(2);
-myList.AddFirst(3);
+var myQueue = new CustomedQueue<int>();
 
-//myList.AddItem(1);
-//myList.AddItem(2);
-//myList.AddItem(3);
-//myList.AddItem(4);
-//myList.AddItem(5);
-//myList.AddLast(6);
-//myList.AddLast(7);
-//myList.AddLast(8);
-//myList.AddLast(9);
+myQueue.Enqueue(1);
+myQueue.Enqueue(2);
+myQueue.Enqueue(3);
 
+
+//myStack.Push(1);
+//myStack.Push(2);
+//myStack.Push(3);
+//myStack.Pop();
+//myStack.Pop();
 
 
 
